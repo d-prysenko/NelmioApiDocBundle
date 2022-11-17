@@ -19,4 +19,15 @@ use OpenApi\Annotations\Operation as BaseOperation;
 #[\Attribute(\Attribute::TARGET_METHOD)]
 class Operation extends BaseOperation
 {
+    /**
+     * @inheritdoc
+     */
+    public static $_types = [
+        'path' => 'string',
+        'method' => 'string',
+        'tags' => '[string]',
+        'summary' => 'string',
+        'description' => '[string]',
+        'deprecated' => 'boolean',
+    ];
 }
