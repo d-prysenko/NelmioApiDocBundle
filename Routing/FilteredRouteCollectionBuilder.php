@@ -71,11 +71,12 @@ final class FilteredRouteCollectionBuilder
     {
         $filteredRoutes = new RouteCollection();
         foreach ($routes->all() as $name => $route) {
-            if ($this->matchPath($route)
+            if ($this->matchVersion($route)
+                || ($this->matchPath($route)
                 && $this->matchHost($route)
                 && $this->matchAnnotation($route)
                 && $this->matchName($name)
-                && $this->defaultRouteDisabled($route)
+                && $this->defaultRouteDisabled($route))
             ) {
                 $filteredRoutes->add($name, $route);
             }
@@ -178,6 +179,12 @@ final class FilteredRouteCollectionBuilder
 
         return false;
     }
+
+    private function matchVersion(Route $route): bool
+    {
+        return $route->getDefault('_version') === $this->area;
+    }
+
 
     /**
      * @param \ReflectionClass|\ReflectionMethod $reflection
