@@ -64,6 +64,8 @@ final class NelmioApiDocExtension extends Extension implements PrependExtensionI
         $routesDefinition = (new Definition(RouteCollection::class))
             ->setFactory([new Reference('router'), 'getRouteCollection']);
 
+        $container->setDefinition('nelmio_api_doc.routes', $routesDefinition);
+
         $container->setParameter('nelmio_api_doc.areas', array_keys($config['areas']));
         $container->setParameter('nelmio_api_doc.media_types', $config['media_types']);
         $container->setParameter('nelmio_api_doc.use_validation_groups', $config['use_validation_groups']);
